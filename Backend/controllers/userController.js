@@ -2,15 +2,6 @@ import mongoose from "../db/conn.js";
 import userSchema from "../models/usermodel.js";
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
-import nodemailer from "nodemailer";
-
-const transporter = nodemailer.createTransport({
-  service: "Gmail", // Use the appropriate email service
-  auth: {
-    user: "bpathum@gmail.com", // Replace with your email address
-    pass: "pgfliawbkmllcenm", // Replace with your email password or an app-specific password
-  },
-});
 
 export const userModel = mongoose.model("user", userSchema);
 
@@ -46,14 +37,6 @@ export function registerUser(req, res) {
         subject: "Hello from Nodemailer",
         text: "This is a test email sent from Nodemailer.",
       };
-
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          console.error("Error sending email:", error);
-        } else {
-          console.log("Email sent:", info.response);
-        }
-      });
     })
     .catch((err) => {
       res.send(err);

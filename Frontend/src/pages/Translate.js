@@ -13,6 +13,7 @@ import HistoryFeature from "./features/HistoryFeature";
 import FavoriteFeatue from "./features/FavoriteFeatue";
 import SettingsFeature from "./features/SettingsFeature";
 import CloseBtn from "../utils/CloseBtn";
+import logoicon from "../assets/logo.svg";
 
 export default function Translate() {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ export default function Translate() {
     "bg-blue-100 p-1.5 text-blue-500 transition-colors duration-500 dark:bg-gray-700 dark:text-blue-400 rounded-lg";
   const notSelected =
     "rounded-lg p-1.5 text-gray-500 transition-colors duration-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800";
-
+  const [showSidebar, setShowSidebar] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showDropdownModal, setShowDropdownModal] = useState(false);
   const [showFeedbackModal, setShowFeedbackModal] = useState(false);
@@ -271,29 +272,54 @@ export default function Translate() {
     setBanner(false);
   }
 
+  const toggleSidebar = () => {
+    setShowSidebar(!showSidebar);
+  };
+
   return (
     <div className="flex flex-col w-full mb-16">
-      <header className="absolute z-50 bg-gray-900 w-full float-right p-4 flex justify-between items-center md:px-8">
+      <header className="absolute z-50 dark:bg-gray-900 bg-orange-100 w-full float-right p-2 flex justify-between items-center md:px-8">
         <div className="flex items-center">
-          <img
-            src="https://firebasestorage.googleapis.com/v0/b/translator-spm.appspot.com/o/userImg.png?alt=media&token=21e4bdb5-afe8-440d-a448-67edadb3b63a" // Replace with your user icon URL
-            alt="User Icon"
-            className="w-8 h-8 rounded-full mr-2"
-          />
+          <div className="mr-4 cursor-pointer" onClick={toggleSidebar}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-6 "
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="orange"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h7"
+              />
+            </svg>
+          </div>
+          <img src={logoicon} alt="logo" className="w-10 ml-2" />
+
           <span className="text-white font-semibold text-lg">
             {isLogedIn ? user.firstName + " " + user.lastName : ""}
           </span>
         </div>
         {!isLogedIn ? (
-          <button
-            className="bg-white text-blue-500 py-2 px-4 rounded-lg hover:bg-blue-100"
-            onClick={() => navigate("/login")}
-          >
-            Sign in
-          </button>
+          <div>
+            <button
+              className="bg-orange-500 text-white py-2 px-4 rounded-lg  m-2 dark:text-white dark:bg-slate-600"
+              onClick={() => navigate("/login")}
+            >
+              Sign In
+            </button>
+            <button
+              className="bg-white text-orange-500 py-2 px-4 rounded-lg border"
+              onClick={() => navigate("/register")}
+            >
+              Sign Up
+            </button>
+          </div>
         ) : (
           <button
-            className="bg-white text-blue-500 py-2 px-4 rounded-lg hover:bg-blue-100"
+            className="bg-white text-orange-500 py-2 px-4 rounded-lg hover:bg-blue-100"
             onClick={() => {
               console.log(isLogedIn);
               localStorage.removeItem("accessToken");
@@ -307,7 +333,11 @@ export default function Translate() {
       <div className="flex flex-row">
         <div className="relative">
           <aside className="absolute z-10 flex">
-            <div className="flex h-screen w-40 flex-col items-center space-y-8 bg-white py-8 pt-24 dark:border-gray-700 dark:bg-gray-900">
+            <div
+              className={`flex h-screen w-48 flex-col items-center space-y-8 bg-white py-8 pt-24 dark:border-gray-700 dark:bg-gray-900 ${
+                showSidebar ? "sidebar-open" : "sidebar-closed"
+              }`}
+            >
               <div className="relative w-full h-fit">
                 <a
                   href="#"
@@ -317,7 +347,9 @@ export default function Translate() {
                   }}
                   className={`${
                     feature === 1 ? selected : notSelected
-                  } flex flex-row items-center gap-2 pl-5 after:content-['Home'] after:text-xs`}
+                  } flex flex-row items-center gap-2 pl-5 after:content-['Home'] after:text-xs ${
+                    feature === 1 ? "text-orange-500 bg-orange-100" : ""
+                  }`}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -346,7 +378,9 @@ export default function Translate() {
                     }}
                     className={`${
                       feature === 2 ? selected : notSelected
-                    } flex flex-row items-center gap-2 pl-5 after:content-['Premium'] after:text-xs`}
+                    } flex flex-row items-center gap-2 pl-5 after:content-['Premium'] after:text-xs ${
+                      feature === 2 ? "text-orange-500 bg-orange-100" : ""
+                    }`}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -378,7 +412,9 @@ export default function Translate() {
                     }}
                     className={`${
                       feature === 3 ? selected : notSelected
-                    } flex flex-row items-center gap-2 pl-5 after:content-['Bad_Words'] after:text-xs`}
+                    } flex flex-row items-center gap-2 pl-5 after:content-['Bad_Words'] after:text-xs ${
+                      feature === 3 ? "text-orange-500 bg-orange-100" : ""
+                    }`}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -409,7 +445,9 @@ export default function Translate() {
                     }}
                     className={`${
                       feature === 4 ? selected : notSelected
-                    } flex flex-row items-center gap-2 pl-5 after:content-['History'] after:text-xs`}
+                    } flex flex-row items-center gap-2 pl-5 after:content-['History'] after:text-xs ${
+                      feature === 4 ? "text-orange-500 bg-orange-100" : ""
+                    }`}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -441,7 +479,9 @@ export default function Translate() {
                     }}
                     className={`${
                       feature === 5 ? selected : notSelected
-                    } flex flex-row items-center gap-2 pl-5 after:content-['Favorite'] after:text-xs`}
+                    } flex flex-row items-center gap-2 pl-5 after:content-['Favorite'] after:text-xs ${
+                      feature === 5 ? "text-orange-500 bg-orange-100" : ""
+                    }`}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -472,7 +512,9 @@ export default function Translate() {
                   }}
                   className={`${
                     feature === 6 ? selected : notSelected
-                  } flex flex-row items-center gap-2 pl-5 after:content-['Feedback'] after:text-xs`}
+                  } flex flex-row items-center gap-2 pl-5 after:content-['Feedback'] after:text-xs ${
+                    feature === 6 ? "text-orange-500 bg-orange-100" : ""
+                  }`}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -499,7 +541,9 @@ export default function Translate() {
                   }}
                   className={`${
                     feature === 7 ? selected : notSelected
-                  } flex flex-row items-center gap-2 pl-5 after:content-['Settings'] after:text-xs`}
+                  } flex flex-row items-center gap-2 pl-5 after:content-['Settings'] after:text-xs ${
+                    feature === 7 ? "text-orange-500 bg-orange-100" : ""
+                  }`}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

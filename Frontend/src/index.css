@@ -2,22 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
-
 * {
-  font-family: arial,sans-serif;
+  font-family: arial, sans-serif;
 }
 
 body {
   margin: 0;
-  background-color: #202124;
+  background-color: #ffffff;
   /* display: flex; */
-  justify-content:center;
+  justify-content: center;
   height: 100vh;
   width: auto;
   align-items: center;
 }
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #000000; /* Dark mode background color */
+    color: #ffffff; /* Text color in dark mode */
+  }
+}
 
-.output, 
+.output,
 .input {
   display: flex;
   flex-direction: column;
@@ -41,7 +47,7 @@ textarea {
 }
 
 .output textarea {
-  background-color: #303134
+  background-color: #303134;
 }
 
 .arrow-container {
@@ -52,20 +58,18 @@ textarea {
   width: 26px;
   height: 26px;
   fill: #5a5a5d;
-  
 }
 
 .option-list {
   width: 100%;
 }
 
-.search-bar {  
+.search-bar {
   color: white;
   width: 100%;
   display: flex;
   justify-content: center;
   padding: 10px;
-
 }
 
 input {
@@ -77,11 +81,11 @@ input {
   height: 40px;
   background-color: transparent;
   width: 100%;
-  
 }
 
 .search-bar input {
-  background: url(https://www.gstatic.com/images/icons/material/system/2x/search_grey600_24dp.png) right 8px center no-repeat;
+  background: url(https://www.gstatic.com/images/icons/material/system/2x/search_grey600_24dp.png)
+    right 8px center no-repeat;
   background-size: 24px 24px;
   padding-left: 16px;
   padding-right: 40px;
@@ -123,7 +127,6 @@ input {
   background-color: #5a5a5d;
 }
 
-
 .list-item {
   display: flex;
 }
@@ -135,7 +138,7 @@ input {
 }
 
 .button-container {
-  color:#bdc1c6;
+  color: #bdc1c6;
   padding: 18px;
   height: 20px;
 }
@@ -148,23 +151,20 @@ input {
 
 .select-drop-down .down-arrow svg {
   position: relative;
-  left: 250px; 
+  left: 250px;
   top: -33px;
   width: 26px;
   height: 26px;
   fill: #8ab4f8;
 }
 
-
 .input .delete {
   position: relative;
   left: 265px;
   top: -156px;
   font-size: 50px;
-  color:#bdc1c6;
+  color: #bdc1c6;
 }
-
-
 
 .feedback-modal {
   background-color: #fff;
@@ -205,7 +205,6 @@ input {
   background-color: #0056b3;
 }
 
-
 .feedback-button {
   background-color: #007bff;
   color: #fff;
@@ -226,54 +225,47 @@ input {
   padding: 12px 20px;
 }
 
-
-
 .feedback-button-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-
-
 .button-gap {
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
 }
 .feedback-button-container {
   display: flex;
-  flex-direction: column; 
-  align-items: center; 
+  flex-direction: column;
+  align-items: center;
 }
-
 
 .feedback-buttons {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 10px; 
-  gap: 5px; 
+  margin-top: 10px;
+  gap: 5px;
 }
 
-
-
 .back-button {
-  background-color: #dc3545; 
+  background-color: #dc3545;
   color: #fff;
   border: none;
   border-radius: 4px;
   padding: 10px 20px;
   cursor: pointer;
-  margin-top: 10px; 
-  margin-bottom: 20px; 
-  display: block; 
+  margin-top: 10px;
+  margin-bottom: 20px;
+  display: block;
   width: 35%;
-  margin-left: auto; 
-  margin-right: auto; 
+  margin-left: auto;
+  margin-right: auto;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .back-button:hover {
-  background-color: #c82333; 
+  background-color: #c82333;
   transform: scale(1.05);
 }
 
@@ -289,7 +281,8 @@ table {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
-th, td {
+th,
+td {
   padding: 12px 16px;
   text-align: left;
 }
@@ -308,10 +301,10 @@ tr:hover {
 }
 
 /* index.css */
-.update-button{
+.update-button {
   padding: 8px 16px;
   margin-right: 10px;
-  background-color: #007bff ;
+  background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -335,4 +328,14 @@ tr:hover {
 .delete-button:hover {
   background-color: #0056b3;
   transform: scale(1.05);
+}
+
+.sidebar-closed {
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.sidebar-open {
+  transform: translateX(0);
+  transition: transform 0.3s ease;
 }
