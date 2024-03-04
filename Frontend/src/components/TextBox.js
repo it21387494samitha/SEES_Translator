@@ -55,7 +55,7 @@ const TextBox = ({
   }, [style, textToTranslate]); // Include textToTranslate as a dependency
 
   return (
-    <div className={style}>
+    <div className="bg-white">
       <SelectDropDown
         style={style}
         setShowModal={setShowModal}
@@ -63,14 +63,31 @@ const TextBox = ({
       />
       <textarea
         disabled={style === "output"}
-        className={style}
+        className={
+          style === "input"
+            ? "text-black border border-solid border-gray-500"
+            : "text-black border border-solid border-gray-500"
+        }
         placeholder={style === "input" ? "Enter text" : "Translation"}
         onChange={(e) => setTextToTranslate(e.target.value)}
         value={style === "input" ? textToTranslate : translatedText}
       />
-      {style === "input" && (
-        <div className="delete" onClick={handleClick}>
-          ˟
+      {style === "input" && textToTranslate && (
+        <div className="delete absolute top-24 left-60" onClick={handleClick}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18 18 6M6 6l12 12"
+            />
+          </svg>
         </div>
       )}
       {style === "output" && translatedText && (
