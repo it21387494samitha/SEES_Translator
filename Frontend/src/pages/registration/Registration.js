@@ -45,15 +45,15 @@ export default function Registration() {
 
   return (
     <div className=" w-full h-80px bg-white rounded-md overflow-auto" >
-     <div className=" flex justify-center"> <p className=" text-4xl ">Registration form </p></div>
+     <div className=" flex justify-center"> <p className=" text-4xl text-black ">Register Here...  </p></div>
      
       <div className=" flex justify-center">
        
-          <div className=".h-auto w-full  text-center bg-slate-400"  >
-            <div className=" w-45 h-24 mt-96 mb-1"> <img src={myphoto}  alt="photo1"/> </div>
+          <div className=".h-auto w-full  text-cente bg-white" >
+            <div className=" mt-40  "> <img src={myphoto}  alt="photo1"/> </div>
       </div>
 
-        <div className="w-full max-w-md bg-white shadow-2xl rounded px-8 pt-6 pb-8 mb-4 " >
+        <div className=" flex-auto w-full  max-w-lg bg-white shadow-2xl rounded px-8 pt-6 pb-8 mb-4 " >
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="flex flex-row place-content-between">
               <div>
@@ -69,6 +69,7 @@ export default function Registration() {
                     name="fname"
                     type="text"
                     autoComplete="first name"
+                    placeholder="     "
                     required
                     onChange={(e) => setFname(e.target.value)}
                     className="block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -109,7 +110,7 @@ export default function Registration() {
                     name="gender"
                     required
                     onChange={(e) => console.log(e.target.value)}
-                    className="block w-40 rounded-md border-0 px-1.5 py-1.5 text-center text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 max-sm:w-32 sm:text-sm sm:leading-6"
+                    className="block w-48 h-10 rounded-md border-0 px-1.5 py-1.5 text-center text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 max-sm:w-32 sm:text-sm sm:leading-6"
                   >
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
@@ -130,6 +131,7 @@ export default function Registration() {
                     onChange={(e) => setAge(e.target.value)}
                     type="number"
                     required
+                    
                     className="block w-full rounded-md border-0 px-1.5 py-1.5 text-center text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -150,6 +152,7 @@ export default function Registration() {
                   autoComplete="email"
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  placeholder=" ex:- xyz@gmail.com"
                   className="block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -220,27 +223,32 @@ export default function Registration() {
             </div>
             <span className="text-red-600">{error}</span>
 
-            <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-1.5 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Register
-              </button>
-              <button
+            <div className=" flex">
+
+              <div className="w-56" style={{ marginLeft: "8px",marginBottom: "-20px", marginRight:"35px"}} ><button
                 type="button"
                 onClick={() => {
                   navigation("/login");
                 }}
-                className="mt-2 flex w-full justify-center rounded-md bg-red-500 px-1.5 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="mt-2 flex w-full justify-center rounded-md bg-red-500 h-9 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 text-center"
+                style={{display: "flex", alignItems: "center"}}
               >
                 Back
+              </button></div>
+              <div className=" w-56 "style={{ marginRight: "8px",marginTop:"9.4px "}}>
+<button
+                type="submit"
+                className=" h-9 flex w-full justify-center rounded-md bg-indigo-600 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                style={{display: "flex", alignItems: "center"}}
+              >
+                Register
               </button>
+</div>
             </div>
           </form>
         </div>
         <div className=". pt-4  w-full text-center mb-0  "  >
-        <img src={myphot1}  alt="photo1" className=" w-full  "/> 
+        <img src={myphot1}  alt="photo1" className=" mt-80 w-fit"/> 
       </div>
       </div>
     </div>
