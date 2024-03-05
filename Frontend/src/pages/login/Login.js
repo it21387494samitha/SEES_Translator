@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import Jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import loginphoto from "../login/gif.gif"
+import loginphoto2 from "../login/gif3.gif"
 
 export default function Login() {
   const [user, setUser] = useState(null);
@@ -93,10 +95,25 @@ export default function Login() {
   };
 
   return (
-    <div>
-      {!user ? (
-        <div className="bg-slate-100 w-96 rounded-md absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <div className="flex min-h-92 flex-col justify-center px-6 py-12 lg:px-8">
+
+
+<div className="flex" style={{ height: "100vh", width: "100vw" }}>
+
+<div className="w-full  bg-white flex" >
+
+<div className="w-1/2 p-6">
+<div className=" text-center ">
+    
+      <img src={loginphoto2} alt="gif" className=" w-full  " style={{height:"70vh" ,width:"100vh"}}/>
+    
+  </div>
+  </div>
+
+
+    <div className="w-1/2 bg-white">
+     {!user ? (
+        <div  >
+          <div className=" min-h-92 flex-col justify-center px-6 py-12 lg:px-8 bg-slate-500 "style={{height:"70vh"}}>
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
               <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                 Log in to your account
@@ -189,5 +206,24 @@ export default function Login() {
         </div>
       )}
     </div>
+    </div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+   
+
   );
 }
