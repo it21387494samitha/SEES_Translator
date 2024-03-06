@@ -9,6 +9,7 @@ import staricon from "../../assets/star.svg";
 const HistoryFeature = (userId) => {
   const [history, setHistory] = useState([]);
   const user = userId.userId;
+  const [searchQuery, setSearchQuery] = useState("");
 
   const url = "http://localhost:4000";
   async function getDetails() {
@@ -116,13 +117,30 @@ const HistoryFeature = (userId) => {
     doc.save("History_Report.pdf");
   };
 
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const filteredHistory = history.filter(
+    (item) =>
+      item.textToTranslate.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.translatedText.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="bg-white dark:border-gray-700  dark:bg-gray-900">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center mb-2">
         <h2 className="px-5 mt-4 text-2xl font-bold text-orange-500 dark:text-white ">
           Translation History
         </h2>
       </div>
+      <input
+        type="text"
+        placeholder="Search"
+        className="w-80 ml-4 p-2 rounded-2xl border border-gray-300 mx-auto"
+        value={searchQuery}
+        onChange={handleSearchChange}
+      />
       <div>
         <button
           className="float-right mr-4 text-orange-500 dark:text-orange-500"
@@ -132,11 +150,11 @@ const HistoryFeature = (userId) => {
         </button>
       </div>
 
-      <div className="overflow-y-auto  max-h-[70vh] w-full">
+      <div className="overflow-y-auto  max-h-[65vh] w-full">
         <div className="mt-8 space-y-4">
           <div>
             <ul className="list-none p-2 m-2">
-              {history.map((item) => (
+              {filteredHistory.map((item) => (
                 <li key={item._id} className="translate-history-item pt-1">
                   <div className="bg-orange-100 shadow-xl dark:bg-orange-500 text-black w-40 p-2 flex justify-between items-center mb-2 rounded-full dark:text-white">
                     <h2 className="text-x1 opacity-70 dark:text-white ml-2">

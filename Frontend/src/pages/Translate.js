@@ -353,7 +353,9 @@ export default function Translate() {
                   className={`${
                     feature === 1 ? selected : notSelected
                   } flex flex-row items-center gap-2 pl-5 after:content-['Home'] after:text-xs ${
-                    feature === 1 ? "text-orange-500 bg-orange-100" : ""
+                    feature === 1
+                      ? "text-orange-500 bg-orange-100 dark:text-orange-500"
+                      : ""
                   }`}
                 >
                   <svg
@@ -384,7 +386,9 @@ export default function Translate() {
                     className={`${
                       feature === 2 ? selected : notSelected
                     } flex flex-row items-center gap-2 pl-5 after:content-['Premium'] after:text-xs ${
-                      feature === 2 ? "text-orange-500 bg-orange-100" : ""
+                      feature === 2
+                        ? "text-orange-500 bg-orange-100 dark:text-orange-500"
+                        : ""
                     }`}
                   >
                     <svg
@@ -418,7 +422,9 @@ export default function Translate() {
                     className={`${
                       feature === 3 ? selected : notSelected
                     } flex flex-row items-center gap-2 pl-5 after:content-['Bad_Words'] after:text-xs ${
-                      feature === 3 ? "text-orange-500 bg-orange-100" : ""
+                      feature === 3
+                        ? "text-orange-500 bg-orange-100 dark:text-orange-500"
+                        : ""
                     }`}
                   >
                     <svg
@@ -452,7 +458,9 @@ export default function Translate() {
                     className={`${
                       feature === 4 ? selected : notSelected
                     } flex flex-row items-center gap-2 pl-5 after:content-['History'] after:text-xs ${
-                      feature === 4 ? "text-orange-500 bg-orange-100" : ""
+                      feature === 4
+                        ? "text-orange-500 bg-orange-100 dark:text-orange-500"
+                        : ""
                     }`}
                   >
                     <svg
@@ -486,7 +494,9 @@ export default function Translate() {
                     className={`${
                       feature === 5 ? selected : notSelected
                     } flex flex-row items-center gap-2 pl-5 after:content-['Favorite'] after:text-xs ${
-                      feature === 5 ? "text-orange-500 bg-orange-100" : ""
+                      feature === 5
+                        ? "text-orange-500 bg-orange-100 dark:text-orange-500"
+                        : ""
                     }`}
                   >
                     <svg
@@ -519,7 +529,9 @@ export default function Translate() {
                   className={`${
                     feature === 6 ? selected : notSelected
                   } flex flex-row items-center gap-2 pl-5 after:content-['Feedback'] after:text-xs ${
-                    feature === 6 ? "text-orange-500 bg-orange-100" : ""
+                    feature === 6
+                      ? "text-orange-500 bg-orange-100 dark:text-orange-500"
+                      : ""
                   }`}
                 >
                   <svg
@@ -548,7 +560,9 @@ export default function Translate() {
                   className={`${
                     feature === 7 ? selected : notSelected
                   } flex flex-row items-center gap-2 pl-5 after:content-['Settings'] after:text-xs ${
-                    feature === 7 ? "text-orange-500 bg-orange-100" : ""
+                    feature === 7
+                      ? "text-orange-500 bg-orange-100 dark:text-orange-500"
+                      : ""
                   }`}
                 >
                   <svg
