@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import myphoto from "../registration/1111111111111111111111111.webp"
-import myphot1 from "../registration/ssssssssssssssssssssss.webp"
+import myphot1 from "../registration/image_processing20191104-3658-12n18dk.gif"
+
 
 export default function Registration() {
   const [firstName, setFname] = useState("");
@@ -44,16 +45,16 @@ export default function Registration() {
   };
 
   return (
-    <div className=" w-full h-80px bg-white rounded-md overflow-auto" >
+    <div className=" w-full h-full bg-white rounded-md overflow-auto" >
      <div className=" flex justify-center"> <p className=" text-4xl text-black ">Register Here...  </p></div>
      
       <div className=" flex justify-center">
        
-          <div className=".h-auto w-full  text-cente bg-white" >
-            <div className=" mt-40  "> <img src={myphoto}  alt="photo1"/> </div>
+          <div className=".h-full  w-1/2 text-cente bg-white"  >
+            <div className=" " style={{width:"100vh",height:"60vh"}}> <img src={myphot1}  alt="photo1"/> </div>
       </div>
 
-        <div className=" flex-auto w-full  max-w-lg bg-white shadow-2xl rounded px-8 pt-6 pb-8 mb-4 " >
+        <div className=" flex-auto w-60vh  max-w-lg bg-white shadow-2xl rounded px-8 pt-6 pb-8 mb-4 " style={{border:"1px solid black",boxShadow:"0 0 10px rgba(0, 0, 0, 0.5)"}} >
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="flex flex-row place-content-between">
               <div>
@@ -247,9 +248,7 @@ export default function Registration() {
             </div>
           </form>
         </div>
-        <div className=". pt-4  w-full text-center mb-0  "  >
-        <img src={myphot1}  alt="photo1" className=" mt-80 w-fit"/> 
-      </div>
+        
       </div>
     </div>
   );
