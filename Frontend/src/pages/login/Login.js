@@ -6,6 +6,7 @@ import loginphoto from "../login/gif.gif"
 import loginphoto2 from "../login/gif3.gif"
 import loginphoto3 from "../login/formbg.jpg"
 import loginV from "../login/Pinterest_2.mp4"
+import logol from "../login/Screenshot 2024-03-06 154100.png"
 
 export default function Login() {
   const [user, setUser] = useState(null);
@@ -99,9 +100,20 @@ export default function Login() {
   return (
 
 
-<div className="flex    bg-white" style={{ height: "100vh", width: "100vw" }}>
+<div style={{height:"90vh"}}>
+  <div className="flex w-full h-30 bg-white ">
+    <div className="flex w-26 h-24 "  ><img src={logol} alt=""/></div>
+    <div className=" py-3  mr-70  pt-20 text-5xl font-bold leading-9 tracking-tight text-gray-900">Get A Quick, 
+    Free Translation</div>
+    <div className=" mx-12 text-black text-3xl"></div>
 
-<div className=" flex mt-20 mx-5"  style={{width:"180vh",height:"80vh"}}  >
+  </div>
+
+<div className="flex    bg-white" style={{ height: "90vh", width: "100vw" }}>
+
+
+<div className=" flex mt-8 mx-5"  style={{width:"180vh",height:"80vh"}}  >
+  
 <video className="background-video" autoPlay loop muted>
         <source src={loginV} type="video/mp4" />
         Your browser does not support the video tag.
@@ -116,9 +128,9 @@ export default function Login() {
   </div>
 
 
-    <div className="w-1/2 bg-white" style={{}}>
+    <div className="w-1/2 bg-white" >
      {!user ? (
-        <div className=" px-24" >
+        <div className=" px-16" >
          
           <div className=" min-h-92 flex-col justify-center py-12 lg:px-8 bg-white mt-7   "style={{height:"70vh",width:"60vh",border:"1px solid black", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)"}}>
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -195,7 +207,7 @@ export default function Login() {
                 Not a member?
                 <a
                   href=""
-                  className="font-semibold pl-2 leading-6  text-Orange-500 hover:text-indigo-500"
+                  className="font-semibold pl-2 leading-6 text-indigo-600 hover:text-indigo-500"
                   onClick={() => navigate("/register")}
                 >
                   Register here
@@ -228,7 +240,7 @@ export default function Login() {
 
 
 
-
+</div>
 
    
 
