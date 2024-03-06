@@ -4,6 +4,8 @@ import Jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import loginphoto from "../login/gif.gif"
 import loginphoto2 from "../login/gif3.gif"
+import loginphoto3 from "../login/formbg.jpg"
+import loginV from "../login/Pinterest_2.mp4"
 
 export default function Login() {
   const [user, setUser] = useState(null);
@@ -97,23 +99,28 @@ export default function Login() {
   return (
 
 
-<div className="flex" style={{ height: "100vh", width: "100vw" }}>
+<div className="flex    bg-white" style={{ height: "100vh", width: "100vw" }}>
 
-<div className="w-full  bg-white flex" >
-
+<div className=" flex mt-20 mx-5"  style={{width:"180vh",height:"80vh"}}  >
+<video className="background-video" autoPlay loop muted>
+        <source src={loginV} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+{/* ,backgroundImage: `url(${loginphoto2})` */}
 <div className="w-1/2 p-6">
 <div className=" text-center ">
     
-      <img src={loginphoto2} alt="gif" className=" w-full  " style={{height:"70vh" ,width:"100vh"}}/>
+      {/* <img src={loginphoto2} alt="gif" className=" w-full " style={{height:"70vh" ,width:"100vh"}}/> */}
     
   </div>
   </div>
 
 
-    <div className="w-1/2 bg-white">
+    <div className="w-1/2 bg-white" style={{}}>
      {!user ? (
-        <div  >
-          <div className=" min-h-92 flex-col justify-center px-6 py-12 lg:px-8 bg-slate-500 "style={{height:"70vh"}}>
+        <div className=" px-24" >
+         
+          <div className=" min-h-92 flex-col justify-center py-12 lg:px-8 bg-white mt-7   "style={{height:"70vh",width:"60vh",border:"1px solid black", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)"}}>
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
               <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                 Log in to your account
@@ -188,7 +195,7 @@ export default function Login() {
                 Not a member?
                 <a
                   href=""
-                  className="font-semibold pl-2 leading-6 text-indigo-600 hover:text-indigo-500"
+                  className="font-semibold pl-2 leading-6  text-Orange-500 hover:text-indigo-500"
                   onClick={() => navigate("/register")}
                 >
                   Register here
