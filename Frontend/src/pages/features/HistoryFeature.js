@@ -1,12 +1,15 @@
 // TranslationHistory.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import deletelogo from "../../assets/delete.svg";
+import deletelogo from "../../assets/bin.svg";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import exporticon from "../../assets/export.svg";
+import staricon from "../../assets/star.svg";
 const HistoryFeature = (userId) => {
   const [history, setHistory] = useState([]);
   const user = userId.userId;
+  const [searchQuery, setSearchQuery] = useState("");
 
   const url = "http://localhost:4000";
   async function getDetails() {
@@ -114,56 +117,85 @@ const HistoryFeature = (userId) => {
     doc.save("History_Report.pdf");
   };
 
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const filteredHistory = history.filter(
+    (item) =>
+      item.textToTranslate.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.translatedText.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <div>
-      <div className="flex justify-between items-center">
-        <h2 className="px-5 text-lg font-medium text-black dark:text-white">
+    <div className="bg-white dark:border-gray-700  dark:bg-gray-900">
+      <div className="flex justify-between items-center mb-2">
+        <h2 className="px-5 mt-4 text-2xl font-bold text-orange-500 dark:text-white ">
           Translation History
         </h2>
       </div>
-      <button
-        className="float-right mr-4 dark:text-white"
-        onClick={handleDeleteAll}
-      >
-        Clear All
-      </button>
+      <input
+        type="text"
+        placeholder="Search"
+        className="w-80 ml-4 p-2 rounded-2xl border border-gray-300 mx-auto"
+        value={searchQuery}
+        onChange={handleSearchChange}
+      />
+      <div>
+        <button
+          className="float-right mr-4 text-orange-500 dark:text-orange-500"
+          onClick={handleDeleteAll}
+        >
+          Clear All History
+        </button>
+      </div>
 
-      <div className="mt-8 space-y-4">
-        <div>
-          <ul className="list-none p-2 m-2">
-            {history.map((item) => (
-              <li key={item._id} className="translate-history-item pt-1">
-                <div className="bg-blue-600 text-black p-2 flex justify-between items-center mb-2 rounded dark:text-white">
-                  <h2 className="text-x1 opacity-70 dark:text-white">
-                    {item.inputLanguage} <span>&rarr;</span>{" "}
-                    {item.outputLanguage}
-                  </h2>
-                  <img
-                    className="h-5 w-5 filter invert opacity-80"
-                    src={deletelogo}
-                    alt="Delete"
-                    onClick={(e) => handleDelete(item._id)}
-                    style={{ cursor: "pointer" }}
-                  />
-                </div>
-                <div className="original-text text-black opacity-50 dark:text-white">
-                  <strong>Original Text:</strong> {item.textToTranslate}
-                </div>
-                <div className="translated-text text-black opacity-50 dark:text-white">
-                  <strong>Translated Text:</strong> {item.translatedText}
-                </div>
-                <hr className="my-2 border-blue-500 mt-7 opacity-30" />{" "}
-                {/* Separator line */}
-              </li>
-            ))}
-          </ul>
+      <div className="overflow-y-auto  max-h-[65vh] w-full">
+        <div className="mt-8 space-y-4">
+          <div>
+            <ul className="list-none p-2 m-2">
+              {filteredHistory.map((item) => (
+                <li key={item._id} className="translate-history-item pt-1">
+                  <div className="bg-orange-100 shadow-xl dark:bg-orange-500 text-black w-40 p-2 flex justify-between items-center mb-2 rounded-full dark:text-white">
+                    <h2 className="text-x1 opacity-70 dark:text-white ml-2">
+                      {item.inputLanguage} <span>&rarr;</span>{" "}
+                      {item.outputLanguage}
+                    </h2>
+                  </div>
+                  <div>
+                    <img
+                      className="h-5 w-5 filter invert opacity-80 float-end ml-4 "
+                      src={deletelogo}
+                      alt="Delete"
+                      onClick={(e) => handleDelete(item._id)}
+                      style={{ cursor: "pointer" }}
+                    />
+                    <img
+                      src={staricon}
+                      className="h-5 w-5 filter invert opacity-80 float-end "
+                    />
+                  </div>
+                  <div className="ml-2 mt-2">
+                    <div className="original-text text-black opacity-70 dark:text-white">
+                      <strong></strong> {item.textToTranslate}
+                    </div>
+                    <div className="translated-text text-black opacity-70 dark:text-white">
+                      <strong></strong> {item.translatedText}
+                    </div>
+                  </div>
+                  <hr className="my-2 border-orange-500 mt-7 opacity-30" />{" "}
+                  {/* Separator line */}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
       <button
-        className="fixed bottom-0 left-30 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
+        className="fixed top-4 right-10  text-white px-4 py-2 rounded hover:bg-blue-700"
         onClick={generateHistoryReport}
       >
-        Download PDF
+        <img src={exporticon} />
       </button>
     </div>
   );
