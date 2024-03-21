@@ -26,7 +26,7 @@ export default function MemberShipPlan() {
             <div class="flex space-x-10 pt-10">
               {membership.map((plan, index) => (
                 <div key={index} class="py-12">
-                  <div class="bg-white pt-4 rounded-xl space-y-6 overflow-hidden transition-all duration-500 transform hover:-translate-y-6 hover:scale-105 shadow-xl hover:shadow-2xl cursor-pointer">
+                  <div class="  pt-4 rounded-xl space-y-6 overflow-hidden transition-all duration-500 transform hover:-translate-y-6 hover:scale-105 shadow-xl hover:shadow-2xl cursor-pointer">
                     <div class="px-8 flex justify-between items-center">
                       <h4 class="text-xl font-bold text-gray-800">
                         {plan.name}
