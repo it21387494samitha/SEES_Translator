@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
+
 export default function BadwordFeature(userId) {
   const [postDetails, setPostDetails] = useState([]);
 
@@ -46,7 +47,7 @@ export default function BadwordFeature(userId) {
   }
   return (
     <div>
-      <h2 className="px-5 text-lg font-medium text-white dark:text-white">
+      <h2 className="px-5 mt-4 text-2xl font-bold text-orange-500 dark:text-white">
         Bad Words
       </h2>
 

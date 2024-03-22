@@ -2,6 +2,7 @@ import { application, response } from "express";
 import BadWordModel from "../models/BadWordsModel.js";
 import { myPromises } from "../controllers/myPromise.js";
 
+
 //show all list of B words
 
 const index = (req, res, next) => {
@@ -62,6 +63,7 @@ const checkBword = (req, res, next) => {
     .then((result) => {
       console.log(result);
       if (result.hasBadWords) {
+        
         next();
       } else res.send(result);
     })
@@ -84,6 +86,13 @@ const remove = (req, res) => {
       });
     });
 };
+
+
+// const deletebadword = (req, res) => {
+//   BadWordModel.findByIdAndDelete(req.params.id)
+//     .then((badword) => res.json(badword))
+//     .catch((err) => res.json(err));
+// };
 
 const getAllBWordsById = (req, res) => {
     // const id = req.body.params.id;
@@ -115,10 +124,14 @@ const getAllBWordsById = (req, res) => {
 
 }
 
+
+
+
 export default {
   index,
   store,
   checkBword,
   remove,
-  getAllBWordsById
+  getAllBWordsById,
+  
 };
