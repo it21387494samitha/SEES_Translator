@@ -2,7 +2,6 @@ import express, { json } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import userRouter from "./Routers/userRouter.js";
-
 import membershipRouter from "./Routers/memberShipRouter.js";
 import membershipTypeRouter from "./Routers/membershipTypeRouter.js";
 import badWordRouter from "./Routers/badWordRouter.js";
@@ -12,7 +11,6 @@ import paymentRouter from "./Routers/paymentRouter.js";
 import Stripe from "stripe";
 import historyRouter from "./Routers/historyRouter.js";
 import savedwordRouter from "./Routers/SavedWordRouter.js";
-
 import checkoutRouter from "./Routers/checkoutRouter.js";
 
 dotenv.config();

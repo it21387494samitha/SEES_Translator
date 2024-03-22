@@ -3,7 +3,7 @@ import userSchema from "../models/usermodel.js";
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
 
-export const userModel = mongoose.model("user", userSchema);
+export const userModel = mongoose.model("User", userSchema);
 
 export function hashPasswordNew(password) {
   return crypto
@@ -31,7 +31,7 @@ export function registerUser(req, res) {
       res.send(response);
       console.log("User added successfully");
 
-  
+
     })
     .catch((err) => {
       res.send(err);
@@ -129,26 +129,58 @@ const loginUser = (req, res) => {
     });
 };
 
-//get user details
-const userDetails = (req, res) => {
-  const email = req.user.email;
+const userDetailsByEmail = (req, res) => {
+  const email = req.params.email; // Assuming email is passed as a route parameter
+  // console.log("Email:", email); // Log the email for debugging
+
+  // Find the user by email in the database
   userModel
     .findOne({ email: email })
     .then((user) => {
-      // check response is not null
-      if (user != null) {
-        //send user details
+      if (user) {
+        // User found, send details
+        // console.log("User found:", user); // Log user details for debugging
         res.status(200).json({
           message: "User Details",
           user: user,
         });
       } else {
-        res.send("User not found");
+        // User not found
+        // console.log("User not found");
+        res.status(404).json({ message: "User not found" });
       }
     })
     .catch((err) => {
-      res.send(err);
-      console.log(err);
+      // Error occurred
+      // console.error("Error fetching user details:", err); // Log error for debugging
+      res.status(500).json({ error: "Internal Server Error" });
+    });
+};
+
+//get user details
+const userDetails = (req, res) => {
+  const email = req.user.email;
+  // console.log("User email:", email); // Log the email for debugging
+  userModel
+    .findOne({ email: email })
+    .then((user) => {
+      if (user) {
+        // User found, send details
+        // console.log("User found:", user); // Log user details for debugging
+        res.status(200).json({
+          message: "User Details",
+          user: user,
+        });
+      } else {
+        // User not found
+        // console.log("User not found");
+        res.status(404).json({ message: "User not found" });
+      }
+    })
+    .catch((err) => {
+      // Error occurred
+      console.error("Error fetching user details:", err); // Log error for debugging
+      res.status(500).json({ error: "Internal Server Error" });
     });
 };
 
@@ -227,4 +259,5 @@ export default {
   showName,
   loginUser,
   userDetails,
+  userDetailsByEmail,
 };
