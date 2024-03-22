@@ -51,6 +51,12 @@ export default function Registration() {
        
          
 
+
+
+          {/* <div className=".h-auto w-full  text-cente bg-white" >
+            <div className=" mt-40  "> <img src={myphoto}  alt="photo1"/> </div>
+      </div> */}
+
         <div className="flex-auto w-full max-w-lg bg-white shadow-2xl rounded-xl px-8 pt-6 pb-8 mb-4" >
         <form className="space-y-6" onSubmit={handleSubmit}>
     <div className="flex flex-row place-content-between">
