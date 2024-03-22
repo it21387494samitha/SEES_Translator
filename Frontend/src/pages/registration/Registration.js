@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import myphoto from "../registration/1111111111111111111111111.webp"
-import myphot1 from "../registration/ssssssssssssssssssssss.webp"
+import myphot1 from "../registration/image_processing20191104-3658-12n18dk.gif"
 import backgroundImage from "../registration/pexels-pixabay-268533.jpg"
 
 export default function Registration() {
@@ -50,11 +49,15 @@ export default function Registration() {
      
       <div className=" flex justify-center">
        
+         
+
+
+
           {/* <div className=".h-auto w-full  text-cente bg-white" >
             <div className=" mt-40  "> <img src={myphoto}  alt="photo1"/> </div>
       </div> */}
 
-        <div className=" flex-auto w-full  max-w-lg bg-white shadow-2xl rounded px-8 pt-6 pb-8 mb-4 " >
+        <div className="flex-auto w-full max-w-lg bg-white shadow-2xl rounded-xl px-8 pt-6 pb-8 mb-4" >
         <form className="space-y-6" onSubmit={handleSubmit}>
     <div className="flex flex-row place-content-between">
       <div>

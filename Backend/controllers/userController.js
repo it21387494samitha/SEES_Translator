@@ -30,6 +30,8 @@ export function registerUser(req, res) {
     .then((response) => {
       res.send(response);
       console.log("User added successfully");
+
+
     })
     .catch((err) => {
       res.send(err);
