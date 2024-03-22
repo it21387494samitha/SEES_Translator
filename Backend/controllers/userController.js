@@ -31,12 +31,7 @@ export function registerUser(req, res) {
       res.send(response);
       console.log("User added successfully");
 
-      const mailOptions = {
-        from: "it21180552@my.sliit.lk", // Replace with your email address
-        to: newUser.email, // Replace with the recipient's email address
-        subject: "Hello from Nodemailer",
-        text: "This is a test email sent from Nodemailer.",
-      };
+  
     })
     .catch((err) => {
       res.send(err);
