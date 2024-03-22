@@ -5,7 +5,7 @@ export default function BadwordFeature(userId) {
   const [postDetails, setPostDetails] = useState([]);
 
   const user = userId.userId;
-  const url = "http://localhost4000";
+  const url = "http://localhost:4000";
   async function getDetails() {
     const id = { user };
 

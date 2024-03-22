@@ -42,7 +42,8 @@ export default function Translate() {
   const [feature, setFeature] = useState(1); // Updated state
   const [banner, setBanner] = useState(false); // Updated state
   const [isActiveMember, setIsActivemember] = useState(false);
-
+  const [isVisible, setIsVisible] = useState(true);
+  const [isSubscription, setSubscription] = useState(false);
   const url = "http://localhost:4000";
   const getLanguages = async () => {
     try {
@@ -132,6 +133,14 @@ export default function Translate() {
         });
     } catch (error) {}
   };
+
+  // const isSubscription = async () => {
+  //   try {
+  //     const data = {
+  //       email:
+  //     }
+  //   }
+  // }
 
   useEffect(() => {
     getLanguages();
@@ -276,9 +285,13 @@ export default function Translate() {
     setShowSidebar(!showSidebar);
   };
 
+  const openhistorybanner = () => {
+    setIsVisible(!isVisible);
+  };
+
   return (
     <div className="flex flex-col w-full mb-16">
-      <header className="absolute z-50 dark:bg-gray-900 bg-orange-100 w-full float-right p-2 flex justify-between items-center md:px-8">
+      <header className="absolute z-50 dark:bg-gray-900 bg-orange-500 w-full float-right p-2 flex justify-between items-center md:px-8">
         <div className="flex items-center">
           <div className="mr-4 cursor-pointer" onClick={toggleSidebar}>
             <svg
@@ -298,7 +311,7 @@ export default function Translate() {
           </div>
           <img src={logoicon} alt="logo" className="w-10 ml-2" />
 
-          <span className="text-white font-semibold text-lg">
+          <span className="text-white font-semibold text-lg ml-4">
             {isLogedIn ? user.firstName + " " + user.lastName : ""}
           </span>
         </div>
@@ -348,7 +361,9 @@ export default function Translate() {
                   className={`${
                     feature === 1 ? selected : notSelected
                   } flex flex-row items-center gap-2 pl-5 after:content-['Home'] after:text-xs ${
-                    feature === 1 ? "text-orange-500 bg-orange-100" : ""
+                    feature === 1
+                      ? "text-orange-500 bg-orange-100 dark:text-orange-500"
+                      : ""
                   }`}
                 >
                   <svg
@@ -379,7 +394,9 @@ export default function Translate() {
                     className={`${
                       feature === 2 ? selected : notSelected
                     } flex flex-row items-center gap-2 pl-5 after:content-['Premium'] after:text-xs ${
-                      feature === 2 ? "text-orange-500 bg-orange-100" : ""
+                      feature === 2
+                        ? "text-orange-500 bg-orange-100 dark:text-orange-500"
+                        : ""
                     }`}
                   >
                     <svg
@@ -402,7 +419,7 @@ export default function Translate() {
                 ""
               )}
 
-              {user._id ? (
+              {user._id && user.subscription == true ? (
                 <div className="relative w-full h-fit">
                   <a
                     href="#"
@@ -413,7 +430,9 @@ export default function Translate() {
                     className={`${
                       feature === 3 ? selected : notSelected
                     } flex flex-row items-center gap-2 pl-5 after:content-['Bad_Words'] after:text-xs ${
-                      feature === 3 ? "text-orange-500 bg-orange-100" : ""
+                      feature === 3
+                        ? "text-orange-500 bg-orange-100 dark:text-orange-500"
+                        : ""
                     }`}
                   >
                     <svg
@@ -442,11 +461,14 @@ export default function Translate() {
                     onClick={(e) => {
                       e.preventDefault();
                       handleFeature(4);
+                      openhistorybanner();
                     }}
                     className={`${
                       feature === 4 ? selected : notSelected
                     } flex flex-row items-center gap-2 pl-5 after:content-['History'] after:text-xs ${
-                      feature === 4 ? "text-orange-500 bg-orange-100" : ""
+                      feature === 4
+                        ? "text-orange-500 bg-orange-100 dark:text-orange-500"
+                        : ""
                     }`}
                   >
                     <svg
@@ -480,7 +502,9 @@ export default function Translate() {
                     className={`${
                       feature === 5 ? selected : notSelected
                     } flex flex-row items-center gap-2 pl-5 after:content-['Favorite'] after:text-xs ${
-                      feature === 5 ? "text-orange-500 bg-orange-100" : ""
+                      feature === 5
+                        ? "text-orange-500 bg-orange-100 dark:text-orange-500"
+                        : ""
                     }`}
                   >
                     <svg
@@ -513,7 +537,9 @@ export default function Translate() {
                   className={`${
                     feature === 6 ? selected : notSelected
                   } flex flex-row items-center gap-2 pl-5 after:content-['Feedback'] after:text-xs ${
-                    feature === 6 ? "text-orange-500 bg-orange-100" : ""
+                    feature === 6
+                      ? "text-orange-500 bg-orange-100 dark:text-orange-500"
+                      : ""
                   }`}
                 >
                   <svg
@@ -542,7 +568,9 @@ export default function Translate() {
                   className={`${
                     feature === 7 ? selected : notSelected
                   } flex flex-row items-center gap-2 pl-5 after:content-['Settings'] after:text-xs ${
-                    feature === 7 ? "text-orange-500 bg-orange-100" : ""
+                    feature === 7
+                      ? "text-orange-500 bg-orange-100 dark:text-orange-500"
+                      : ""
                   }`}
                 >
                   <svg
@@ -570,7 +598,7 @@ export default function Translate() {
 
             {feature === 2 && banner ? (
               <div
-                className={`h-screen pt-24 w-60 transition-transform ease-in-out duration-1000 overflow-y-auto border-l border-r bg-white py-8 dark:border-gray-700 dark:bg-gray-900 sm:w-[1200px] ${
+                className={`h-screen pt-24  w-screen transition-transform ease-in-out duration-1000 overflow-y-auto s bg-white py-8 dark:border-gray-700 dark: bg-white sm:w-[1200px] ${
                   banner ? "translate-x-0" : "-translate-x-full"
                 }`}
               >
@@ -594,9 +622,31 @@ export default function Translate() {
               ""
             )}
             {feature === 4 && banner ? (
-              <div className="h-screen pt-24 flex flex-col w-60 overflow-y-auto border-l border-r bg-white py-8 dark:border-gray-700 dark:bg-gray-900 sm:w-96">
-                <div className="relative">
-                  <CloseBtn closeBanner={closeBanner} />
+              <div
+                className={`move-up fixed bottom-0 left-96 overflow-y-auto  border bg-white py-4 dark:border-gray-700 dark:bg-gray-900 mt-8 h-5/6 w-3/5 rounded-t-2xl rounded ${
+                  isVisible ? "" : "move-down"
+                }`}
+              >
+                <div className="relative cursor-pointer">
+                  <div
+                    className="absolute top-2 right-4"
+                    onClick={openhistorybanner}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="2.5"
+                      stroke="currentColor"
+                      className="h-6 w-6 text-black dark:text-white"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </div>
                 </div>
                 <HistoryFeature userId={user._id} />
               </div>

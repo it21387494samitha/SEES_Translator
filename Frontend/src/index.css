@@ -339,3 +339,28 @@ tr:hover {
   transform: translateX(0);
   transition: transform 0.3s ease;
 }
+
+.move-up {
+  transition: transform 1s ease;
+  transform: translateY(100%);
+}
+
+.move-down {
+  transition: transform 1s ease;
+  transform: translateY(0);
+}
+
+/* Transparent scrollbar */
+::-webkit-scrollbar {
+  width: 8px; /* Set the width of the scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ff8731;
+  height: 40px;
+  border-radius: 4px; /* Set the color of the scrollbar thumb */
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent; /* Set the color of the scrollbar track */
+}
