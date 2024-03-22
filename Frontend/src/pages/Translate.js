@@ -43,7 +43,7 @@ export default function Translate() {
   const [banner, setBanner] = useState(false); // Updated state
   const [isActiveMember, setIsActivemember] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-
+  const [isSubscription, setSubscription] = useState(false);
   const url = "http://localhost:4000";
   const getLanguages = async () => {
     try {
@@ -133,6 +133,14 @@ export default function Translate() {
         });
     } catch (error) {}
   };
+
+  // const isSubscription = async () => {
+  //   try {
+  //     const data = {
+  //       email:
+  //     }
+  //   }
+  // }
 
   useEffect(() => {
     getLanguages();
@@ -411,7 +419,7 @@ export default function Translate() {
                 ""
               )}
 
-              {user._id ? (
+              {user._id && user.subscription == true ? (
                 <div className="relative w-full h-fit">
                   <a
                     href="#"
