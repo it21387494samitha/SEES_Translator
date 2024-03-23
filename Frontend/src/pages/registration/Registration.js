@@ -14,9 +14,12 @@ export default function Registration() {
   const [cnfirmPassword, setCnfirmPassword] = useState("");
   const [address, setAddress] = useState("");
   const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  
 
   const navigation = useNavigate();
   const url = "http://localhost:4000";
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("submit");
@@ -36,12 +39,37 @@ export default function Registration() {
         address,
       });
       console.log(response);
-      navigation("/login");
+      alert("Registration successful!");
+      setTimeout(() => {
+        navigation("/login");
+      }, 3000); // Redirect to login page after 3 seconds
     } catch (error) {
       setError("Error with registration");
       console.log(error);
     }
   };
+
+  const validatePassword = (password) => {
+    if (password.length < 8) {
+      return "Password must be at least 8 characters long.";
+    }
+    if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/.test(password)) {
+      return "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.";
+    }
+    return null;
+  };
+
+  const handlePasswordChange = (e) => {
+    const newPassword = e.target.value;
+    const validationError = validatePassword(newPassword);
+    if (validationError) {
+      setError(validationError);
+    } else {
+      setPassword(newPassword);
+      setError("");
+    }
+  };
+
 
   return (
     <div className=" w-full h-80px bg-white rounded-md overflow-auto" style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover' }} >
@@ -58,6 +86,11 @@ export default function Registration() {
       </div> */}
 
         <div className="flex-auto w-full max-w-lg bg-white shadow-2xl rounded-xl px-8 pt-6 pb-8 mb-4" >
+        {/* {successMessage && ( // Display success message if exists
+            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+              <span className="block sm:inline">{successMessage}</span>
+            </div>
+          )} */}
         <form className="space-y-6" onSubmit={handleSubmit}>
     <div className="flex flex-row place-content-between">
       <div>
@@ -150,20 +183,20 @@ export default function Registration() {
     </div>
 
     <div>
-      <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-        Password
-      </label>
-      <div className="mt-2">
-        <input
-          id="password"
-          name="password"
-          type="password"
-          required
-          onChange={(e) => setPassword(e.target.value)}
-          className="block w-full rounded-md border-gray-300 px-2.5 py-1.5 text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-        />
-      </div>
-    </div>
+              <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
+                Password
+              </label>
+              <div className="mt-2">
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  required
+                  onChange={handlePasswordChange}
+                  className="block w-full rounded-md border-gray-300 px-2.5 py-1.5 text-gray-900 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                />
+              </div>
+            </div>
 
 
             <div>
@@ -208,7 +241,7 @@ export default function Registration() {
                 />
               </div>
             </div>
-            <span className="text-red-600">{error}</span>
+            <span className="text-red-600 font-semibold">{error}</span>
 
             <div className=" flex">
 
