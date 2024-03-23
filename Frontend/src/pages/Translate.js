@@ -32,7 +32,7 @@ export default function Translate() {
   const [outputLanguage, setOutputLanguage] = useState("Sinhala");
   const [textToTranslate, setTextToTranslate] = useState("");
   const [translatedText, setTranslatedText] = useState("");
-  
+
   const [feedback, setFeedback] = useState({
     englishWord: "",
     sinhalaWord: "",
@@ -44,7 +44,8 @@ export default function Translate() {
   const [banner, setBanner] = useState(false); // Updated state
   const [isActiveMember, setIsActivemember] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  const [isBadVisible,setIsBadVisible] = useState(false);
+  const [isBadVisible, setIsBadVisible] = useState(false);
+  const [isSavedVisible, setSavedVisible] = useState(true);
   const [isSubscription, setSubscription] = useState(false);
   const url = "http://localhost:4000";
   const getLanguages = async () => {
@@ -56,9 +57,6 @@ export default function Translate() {
     }
   };
 
-
-
-  
   const refreashToken = async () => {
     try {
       const response = await axios.post(`${url}/user/refresh`, {
@@ -294,10 +292,13 @@ export default function Translate() {
     setIsVisible(!isVisible);
   };
 
-const openbadwordbanner = () => {
-  setIsBadVisible(!isBadVisible);
-  console.log(isBadVisible);
-}
+  const opensavedbanner = () => {
+    setSavedVisible(!isSavedVisible);
+  };
+
+  const openbadwordbanner = () => {
+    setIsBadVisible(!isBadVisible);
+  };
 
   return (
     <div className="flex flex-col w-full mb-16">
@@ -509,6 +510,7 @@ const openbadwordbanner = () => {
                     onClick={(e) => {
                       e.preventDefault();
                       handleFeature(5);
+                      opensavedbanner();
                     }}
                     className={`${
                       feature === 5 ? selected : notSelected
@@ -623,17 +625,17 @@ const openbadwordbanner = () => {
               ""
             )}
             {feature === 3 && banner ? (
-              <div className={`move-up fixed bottom-0 left-96 overflow-y-auto  border bg-white py-4 dark:border-gray-700 dark:bg-gray-900 mt-8 h-5/6 w-3/5 rounded-t-2xl rounded ${
-                isBadVisible ? "" : "move-down"
-              }`}>
-                
+              <div
+                className={`move-up fixed bottom-0 left-96 overflow-y-auto  border bg-white py-4 dark:border-gray-700 dark:bg-gray-900 mt-8 h-5/6 w-3/5 rounded-t-2xl rounded ${
+                  isBadVisible ? "" : "move-down"
+                }`}
+              >
                 <div className="relative cursor-pointer">
-
-                <div  
-                className="absolute top-2 right-4"
-                onClick={openbadwordbanner}
-                >
-                  <svg
+                  <div
+                    className="absolute top-2 right-4"
+                    onClick={openbadwordbanner}
+                  >
+                    <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -647,7 +649,7 @@ const openbadwordbanner = () => {
                         d="M6 18L18 6M6 6l12 12"
                       />
                     </svg>
-                </div>
+                  </div>
                 </div>
                 <BadwordFeature userId={user._id} />{" "}
               </div>
@@ -687,9 +689,31 @@ const openbadwordbanner = () => {
               ""
             )}
             {feature === 5 && banner ? (
-              <div className="h-screen pt-24 w-60 overflow-y-auto border-l border-r bg-white py-8 dark:border-gray-700 dark:bg-gray-900 sm:w-96">
-                <div className="relative">
-                  <CloseBtn closeBanner={closeBanner} />
+              <div
+                className={`move-up fixed bottom-0 left-96 overflow-y-auto  border bg-white py-4 dark:border-gray-700 dark:bg-gray-900 mt-8 h-5/6 w-3/5 rounded-t-2xl rounded ${
+                  isSavedVisible ? "" : "move-down"
+                }`}
+              >
+                <div className="relative cursor-pointer">
+                  <div
+                    className="absolute top-2 right-4"
+                    onClick={opensavedbanner}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="2.5"
+                      stroke="currentColor"
+                      className="h-6 w-6 text-black dark:text-white"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </div>
                 </div>
                 <FavoriteFeatue userId={user._id} />{" "}
               </div>
