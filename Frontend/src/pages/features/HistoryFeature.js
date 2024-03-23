@@ -6,6 +6,7 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import exporticon from "../../assets/export.svg";
 import staricon from "../../assets/star.svg";
+import logo from "../../assets/logo.svg";
 const HistoryFeature = (userId) => {
   const [history, setHistory] = useState([]);
   const user = userId.userId;
@@ -22,7 +23,6 @@ const HistoryFeature = (userId) => {
         })
         .then((response) => {
           setHistory(response.data.response);
-          console.log(response);
         })
         .catch((err) => {
           console.log(err.response?.data?.message);
@@ -128,16 +128,18 @@ const HistoryFeature = (userId) => {
   );
 
   return (
-    <div className="bg-white dark:border-gray-700  dark:bg-gray-900">
-      <div className="flex justify-between items-center mb-2">
-        <h2 className="px-5 mt-4 text-2xl font-bold text-orange-500 dark:text-white ">
+    <div className="bg-white dark:border-gray-700 dark:bg-gray-900 ">
+      <div className="flex items-center">
+        <img src={logo} className="ml-4 w-12 h-12" />{" "}
+        {/* Adjust margin as needed */}
+        <h2 className="px-5 mt-4 text-2xl font-bold text-orange-500 dark:text-white">
           Translation History
         </h2>
       </div>
       <input
         type="text"
         placeholder="Search"
-        className="w-80 ml-4 p-2 rounded-2xl border border-gray-300 mx-auto"
+        className="w-80 mt-4 ml-4 p-2 rounded-2xl border border-orange-300 mx-auto"
         value={searchQuery}
         onChange={handleSearchChange}
       />
@@ -150,29 +152,29 @@ const HistoryFeature = (userId) => {
         </button>
       </div>
 
-      <div className="overflow-y-auto  max-h-[65vh] w-full">
+      <div className="overflow-y-auto  max-h-[62vh] w-full">
         <div className="mt-8 space-y-4">
           <div>
             <ul className="list-none p-2 m-2">
               {filteredHistory.map((item) => (
                 <li key={item._id} className="translate-history-item pt-1">
-                  <div className="bg-orange-100 shadow-xl dark:bg-orange-500 text-black w-40 p-2 flex justify-between items-center mb-2 rounded-full dark:text-white">
+                  <div className="bg-orange-100 shadow-xl dark:bg-orange-600 text-black w-40 p-2 flex justify-between items-center mb-2 rounded-full dark:text-white">
                     <h2 className="text-x1 opacity-70 dark:text-white ml-2">
                       {item.inputLanguage} <span>&rarr;</span>{" "}
                       {item.outputLanguage}
                     </h2>
                   </div>
-                  <div>
-                    <img
-                      className="h-5 w-5 filter invert opacity-80 float-end ml-4 "
-                      src={deletelogo}
-                      alt="Delete"
-                      onClick={(e) => handleDelete(item._id)}
-                      style={{ cursor: "pointer" }}
-                    />
+                  <div className="flex items-center justify-end">
                     <img
                       src={staricon}
-                      className="h-5 w-5 filter invert opacity-80 float-end "
+                      className="h-5 w-5 opacity-80 cursor-pointer"
+                      alt="Star"
+                    />
+                    <img
+                      className="h-5 w-5 cursor-pointer ml-4"
+                      src={deletelogo}
+                      alt="Delete"
+                      onClick={() => handleDelete(item._id)}
                     />
                   </div>
                   <div className="ml-2 mt-2">
@@ -192,7 +194,7 @@ const HistoryFeature = (userId) => {
         </div>
       </div>
       <button
-        className="fixed top-4 right-10  text-white px-4 py-2 rounded hover:bg-blue-700"
+        className="fixed top-4 right-10  text-white px-4 py-2 rounded "
         onClick={generateHistoryReport}
       >
         <img src={exporticon} />
