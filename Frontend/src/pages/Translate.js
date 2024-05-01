@@ -47,6 +47,8 @@ export default function Translate() {
   const [isBadVisible, setIsBadVisible] = useState(false);
   const [isSavedVisible, setSavedVisible] = useState(true);
   const [isSubscription, setSubscription] = useState(false);
+
+  const subscription = localStorage.getItem("subscription");
   const url = "http://localhost:4000";
   const getLanguages = async () => {
     try {
@@ -347,6 +349,7 @@ export default function Translate() {
             onClick={() => {
               console.log(isLogedIn);
               localStorage.removeItem("accessToken");
+              localStorage.removeItem("subscription");
               navigate("/login");
             }}
           >
@@ -430,7 +433,7 @@ export default function Translate() {
                 ""
               )}
 
-              {user._id && user.subscription == true ? (
+              {user._id && subscription ? (
                 <div className="relative w-full h-fit">
                   <a
                     href="#"
