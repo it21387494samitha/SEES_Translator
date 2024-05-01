@@ -5,6 +5,7 @@ import deleteicon from "../../assets/delete.svg"
 
 export default function BadwordFeature(userId) {
   const [postDetails, setPostDetails] = useState([]);
+  const[badwords,setbadwords] = useState([]);
 
   const user = userId.userId;
   const url = "http://localhost:4000";
@@ -46,15 +47,66 @@ export default function BadwordFeature(userId) {
     const formattedDateTime = `${localDateString} at ${localTimeString}`;
     return formattedDateTime;
   }
+  const handleDeleteAll = () => {
+    // Show a confirmation dialog
+    const confirmation = window.confirm(
+      "Are you sure you want to delete all items?"
+    );
+
+    if (confirmation) {
+      // User clicked "OK," proceed with the deletion
+      axios
+        .delete(`${url}/history/clearAllData`)
+        .then((res) => {
+          // Remove all items from the local state
+          setbadwords([]);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      // User clicked "Cancel," do nothing
+      console.log("Deletion canceled.");
+    }
+  };
+
+  const handleDelete = (id) => {
+    
+    const confirmation = window.confirm(
+      "Are you sure you want to delete this item?"
+    );
+
+    if (confirmation) {
+      // User clicked "OK," proceed with the deletion
+      axios
+        .delete(`${url}/bad/` + id)
+        .then((res) => {
+          // Remove the deleted item from the local state
+          setbadwords((prevbadword) =>
+            prevbadword.filter((item) => item._id !== id)
+          );
+        })
+        .catch((err) => console.log(err));
+    } else {
+      // User clicked "Cancel," do nothing
+      console.log("Deletion canceled.");
+    }
+  };
+
+
   return (
     <div >
       <div className="flex flex-row items-center ml-5">
       <div className="flex flex-col w-10 h-10"><img src={logo} alt="logo" /></div>
   <div className="flex flex-col">
     <h2 className="px-5 mt-4 text-2xl font-bold text-orange-500 dark:text-white">
-      Bad Words
+      Bad Words     
     </h2>
   </div>
+  <button
+          className="float-right mr-4  ml-96 text-orange-500 dark:text-orange-500"
+          onClick={handleDeleteAll}
+        >
+          Clear All Bad Words
+        </button>
   </div>
       <div className="mt-8 space-y-4">
         <div>
@@ -69,7 +121,8 @@ export default function BadwordFeature(userId) {
                    <div className="flex flex-row items-center">
                       <div className="font-sans text-base pb-2 flex flex-row items-center">
                         Inappropriate term was detected :
-                      <div className="w-5 h-5 ml-96"><img  src={deleteicon} alt="delete-icon" /></div>
+                      <div className="w-5 h-5 ml-96"><img  src={deleteicon} alt="delete-icon" onClick={(e) => handleDelete(item._id)}
+                      style={{ cursor: "pointer" }} /></div>
                      </div>
                   </div>
 
