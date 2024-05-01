@@ -14,6 +14,9 @@ import FavoriteFeatue from "./features/FavoriteFeatue";
 import SettingsFeature from "./features/SettingsFeature";
 import CloseBtn from "../utils/CloseBtn";
 import logoicon from "../assets/logo.svg";
+import myphoto from "../pages/1111111111111111111111111.webp"
+
+
 
 export default function Translate() {
   const navigate = useNavigate();
@@ -171,6 +174,14 @@ export default function Translate() {
       console.error("Error translating:", error);
     }
   };
+
+  const navigateToPage3001 = () => {
+    // Navigate to the desired page on port 3001 with the word property in a new window/tab
+    const word = textToTranslate; // Replace "yourData" with the actual word you want to pass
+    const url = `http://localhost:3001/page?word=${word}`;
+    window.open(url, '_blank');
+  };
+
   //Save History
   const storeTranslationData = async (data) => {
     try {
@@ -702,12 +713,21 @@ export default function Translate() {
               </div>
               {/* Add a feedback button */}
               {isLogedIn && (
+                <div>
                 <button
                   className="feedback-button"
                   onClick={handleFeedbackModalOpen}
                 >
                   Provide Feedback
                 </button>
+                
+                <button
+                  className="dictionary-button"
+                  onClick={navigateToPage3001}
+                >
+                  Dictionary
+                </button>
+                </div>
               )}
             </>
           )}
@@ -731,6 +751,17 @@ export default function Translate() {
           )}
         </div>
       </div>
+
+      <div className="h-auto w-full text-center bg-white">
+    <div className="mt-40"> 
+        <img src={myphoto} alt="photo1" style={{ width: '50%', height: '1%' }} />
     </div>
+</div>
+
+
+      
+      
+    </div>
+    
   );
 }

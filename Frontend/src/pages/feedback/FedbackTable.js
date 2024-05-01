@@ -146,7 +146,7 @@ const FeedbackTable = () => {
     <div className="feedback-table mt-4">
       <table className="table-auto w-full border-collapse">
         <thead>
-          <tr className="bg-blue-500 text-white">
+          <tr className="bg-orange-500 text-white">
             <th className="px-4 py-2">Input Language</th>
             <th className="px-4 py-2">Output Language</th>
             <th className="px-4 py-2">Feedback Text</th>
