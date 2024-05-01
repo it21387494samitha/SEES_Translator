@@ -39,7 +39,7 @@ export default function CreateNewMemberShip() {
   return (
 
 
-<div className=" bg-orange-500 h-screen flex justify-center items-center">
+<div className=" bg-slate-300 h-screen flex justify-center items-center">
   <div style={{ width: "30%" }} className="bg-blue-950 p-10 rounded-lg">
     <div className="text-center">
       <h1 className="text-4xl font-bold text-white">Pricing plans</h1>

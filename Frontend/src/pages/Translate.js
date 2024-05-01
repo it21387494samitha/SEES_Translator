@@ -444,7 +444,7 @@ export default function Translate() {
               {user._id && user.subscription == true ? (
                 <div className="relative w-full h-fit">
                   <a
-                    href="#"
+                    href="h"
                     onClick={(e) => {
                       e.preventDefault();
                       handleFeature(3);
@@ -480,7 +480,7 @@ export default function Translate() {
               {user._id ? (
                 <div className="relative w-full h-fit">
                   <a
-                    href="#"
+                    href="h"
                     onClick={(e) => {
                       e.preventDefault();
                       handleFeature(4);

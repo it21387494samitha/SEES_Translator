@@ -6,7 +6,7 @@ import loginphoto from "../login/gif.gif"
 import loginphoto2 from "../login/gif3.gif"
 import loginphoto3 from "../login/formbg.jpg"
 import loginV from "../login/Pinterest_2.mp4"
-import logol from "../login/Screenshot 2024-03-06 154100.png"
+import logol from "../../assets/logo.svg"
 
 export default function Login() {
   const [user, setUser] = useState(null);
@@ -102,7 +102,7 @@ export default function Login() {
 
 <div style={{height:"100vh"}}>
   <div className="flex w-full h-30 bg-white ">
-    <div className="flex w-26 h-24 "  ><img src={logol} alt=""/></div>
+    <div className="flex w-18 h-18 ml-4"  ><img src={logol} alt=""/></div>
     <div className=" py-3  mr-70  pt-20 text-5xl font-bold leading-9 tracking-tight text-gray-900">Get A Quick, 
     Free Translation</div>
     <div className=" mx-12 text-black text-3xl"></div>
