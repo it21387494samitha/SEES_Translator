@@ -30,11 +30,12 @@ export default function FeedbackModal({ feedback, setFeedback, handleFeedbackSub
         rows="4"
         placeholder="Enter your feedback here..."
         value={feedbackText}
+        
         onChange={handleFeedbackTextChange}
         style={{
           borderColor: showAlert ? 'red' : 'initial',
           color: showAlert ? 'red' : 'initial',
-        }}
+        }} required
       />
       {showAlert && <p style={{ color: 'red' }}>Character limit exceeded</p>}
       <p>Remaining Characters: {remainingCharacters}</p> {/* Display remaining characters */}

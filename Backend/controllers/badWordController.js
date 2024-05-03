@@ -19,6 +19,16 @@ const index = (req, res, next) => {
     });
 };
 
+// const deletebadword = (req, res) => {
+//   BadWordModel.findByIdAndDelete(req.params.id)
+//     .then(() => res.json())
+//     .catch((err) => res.json(err));
+// };
+
+
+
+
+
 const store = (req, res) => {
   const name = req.body.params.name;
   const textToTranslate = req.body.params.textToTranslate;
@@ -73,19 +83,21 @@ const checkBword = (req, res, next) => {
     });
 };
 const remove = (req, res) => {
-  const wordID = req.body.ID;
+  const wordID = req.body.userID; // Make sure the property name is correct
   BadWordModel.findByIdAndDelete(wordID)
     .then(() => {
-      res.json({
-        message: "Post deleted success fully!",
+      res.status(200).json({
+        message: "Post deleted successfully!",
       });
     })
-    .catch(() => {
-      res.json({
-        message: "error ocured deleting!",
+    .catch((error) => {
+      console.error("Error deleting post:", error);
+      res.status(500).json({
+        message: "An error occurred while deleting the post.",
       });
     });
 };
+
 
 
 // const deletebadword = (req, res) => {
@@ -133,5 +145,6 @@ export default {
   checkBword,
   remove,
   getAllBWordsById,
+ 
   
 };
