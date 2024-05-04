@@ -3,6 +3,7 @@ import PropTypes from "prop-types"; // Import PropTypes
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { checkWordExistence } from "./api";
+import { FaRegStar, FaStar } from "react-icons/fa";
 const TextBox = ({
   style,
   setShowModal,
@@ -106,11 +107,11 @@ const TextBox = ({
         >
           {isWordSaved ? (
             <span role="img" aria-label="Filled Star">
-              ⭐️
+              <FaStar className="text-orange-400" />
             </span>
           ) : (
-            <span role="img" aria-label="Empty Star">
-              ☆
+            <span role="img" aria-label="Empty Star" className="text-black">
+              <FaRegStar className="text-orange-400" />
             </span>
           )}
         </div>

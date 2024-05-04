@@ -6,6 +6,8 @@ import "jspdf-autotable";
 import exporticon from "../../assets/export.svg";
 import logo from "../../assets/logo.svg";
 import star from "../../assets/filledstar.svg";
+import { FaStar } from "react-icons/fa";
+import { PiExportBold } from "react-icons/pi";
 const FavoriteFeatue = (userId) => {
   const [savedWords, setSavedWords] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
@@ -160,7 +162,7 @@ const FavoriteFeatue = (userId) => {
       <input
         type="text"
         placeholder="Search"
-        className="w-80 mt-4 ml-4 p-2 rounded-2xl border border-gray-300 mx-auto"
+        className="w-80 mt-4 ml-4 pl-4 rounded-xl border border-gray-300 mx-auto"
         value={searchQuery}
         onChange={handleSearch}
       />
@@ -172,8 +174,8 @@ const FavoriteFeatue = (userId) => {
           >
             <div className="translate-history-item w-2/5">
               <div className="flex justify-between items-center">
-                <div className="bg-orange-100 shadow-xl dark:bg-orange-600 text-black w-40 p-2 flex justify-between items-center mb-2 rounded-full dark:text-white">
-                  <h2 className="text-x1 opacity-70 dark:text-white ml-2">
+                <div className="bg-orange-100 shadow-xl dark:bg-orange-600 text-black w-40 p-2 flex justify-between items-center mb-2 rounded-xl dark:text-white">
+                  <h2 className="text-x1 opacity-90 dark:text-white ml-2">
                     {item.inputLanguage} <span>&rarr;</span>{" "}
                     {item.outputLanguage}
                   </h2>
@@ -239,7 +241,7 @@ const FavoriteFeatue = (userId) => {
             <div className="w-1/4 flex justify-end">
               <div onClick={() => handleDelete(item.textToTranslate)}>
                 <span>
-                  <img src={star} className="w-6 cursor-pointer" />
+                  <FaStar className="text-orange-600 text-xl" />
                 </span>
               </div>
             </div>
@@ -253,7 +255,7 @@ const FavoriteFeatue = (userId) => {
         className="fixed top-4 right-10  text-white px-4 py-2 rounded "
         onClick={generateSavedReport}
       >
-        <img src={exporticon} />
+        <PiExportBold className="text-xl" />
       </button>
     </div>
   );

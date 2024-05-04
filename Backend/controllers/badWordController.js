@@ -2,7 +2,6 @@ import { application, response } from "express";
 import BadWordModel from "../models/BadWordsModel.js";
 import { myPromises } from "../controllers/myPromise.js";
 
-
 //show all list of B words
 
 const index = (req, res, next) => {
@@ -25,16 +24,12 @@ const index = (req, res, next) => {
 //     .catch((err) => res.json(err));
 // };
 
-
-
-
-
 const store = (req, res) => {
   const name = req.body.params.name;
   const textToTranslate = req.body.params.textToTranslate;
 
-  console.log("Logging"+name)
-  console.log("Logging"+textToTranslate)
+  console.log("Logging" + name);
+  console.log("Logging" + textToTranslate);
 
   if (!name || !textToTranslate) {
     return res.status(400).json({
@@ -51,13 +46,20 @@ const store = (req, res) => {
     .save()
     .then((response) => {
       console.log("first" + response);
-      res.json({
-        message: "post added successfully!",
-      });
+      if (response) {
+        res.json({
+          message: "Bad", // Sending "Bad" message only after successful insertion
+        });
+      } else {
+        res.json({
+          message: "An error occurred while saving the bad word.",
+        });
+      }
     })
     .catch((err) => {
+      console.error("Error saving bad word:", err);
       res.json({
-        message: "An error occured!",
+        message: "An error occurred!",
       });
     });
 };
@@ -67,13 +69,12 @@ const store = (req, res) => {
 const checkBword = (req, res, next) => {
   const phase = req.body.params.textToTranslate;
 
-  console.log("Checkiiiing" +req.body);
+  console.log("Checkiiiing" + req.body);
 
   myPromises(phase)
     .then((result) => {
       console.log(result);
       if (result.hasBadWords) {
-        
         next();
       } else res.send(result);
     })
@@ -83,22 +84,10 @@ const checkBword = (req, res, next) => {
     });
 };
 const remove = (req, res) => {
-  const wordID = req.body.userID; // Make sure the property name is correct
-  BadWordModel.findByIdAndDelete(wordID)
-    .then(() => {
-      res.status(200).json({
-        message: "Post deleted successfully!",
-      });
-    })
-    .catch((error) => {
-      console.error("Error deleting post:", error);
-      res.status(500).json({
-        message: "An error occurred while deleting the post.",
-      });
-    });
+  BadWordModel.findByIdAndDelete(req.params.id)
+    .then((history) => res.json(history))
+    .catch((err) => res.json(err));
 };
-
-
 
 // const deletebadword = (req, res) => {
 //   BadWordModel.findByIdAndDelete(req.params.id)
@@ -107,37 +96,39 @@ const remove = (req, res) => {
 // };
 
 const getAllBWordsById = (req, res) => {
-    // const id = req.body.params.id;
-    const id = req.query.user || req.body.params?.id;
+  // const id = req.body.params.id;
+  const id = req.query.user || req.body.params?.id;
 
-    if(!id){
-      return res.status(403).json({
-        message: "User not found Login!",
+  if (!id) {
+    return res.status(403).json({
+      message: "User not found Login!",
+    });
+  }
+
+  try {
+    BadWordModel.find({ userID: id })
+      .sort({ createdAt: -1 })
+      .then((response) => {
+        console.log("first");
+        res.json({
+          response,
+        });
+      })
+      .catch(() => {
+        console.log("Error");
+        res.json({
+          message: "error ocured deleting!",
+        });
       });
-    }
-
-    try {
-      BadWordModel.find({userID: id}).sort({createdAt: -1})
-      .then((response) => {      
-        console.log("first")  
-          res.json({
-              response
-          })
-      }).catch(() => {
-          console.log("Error")
-          res.json({
-            message: "error ocured deleting!",
-          })
-      });
-    } catch (error) {
-      console.log(error)
-    }
-
-
-}
-
-
-
+  } catch (error) {
+    console.log(error);
+  }
+};
+const clearAllData = (req, res) => {
+  BadWordModel.deleteMany({})
+    .then(() => res.json({ message: "All data cleared successfully" }))
+    .catch((err) => res.status(500).json({ error: err.message }));
+};
 
 export default {
   index,
@@ -145,6 +136,5 @@ export default {
   checkBword,
   remove,
   getAllBWordsById,
- 
-  
+  clearAllData,
 };

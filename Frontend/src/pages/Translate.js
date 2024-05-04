@@ -14,9 +14,7 @@ import FavoriteFeatue from "./features/FavoriteFeatue";
 import SettingsFeature from "./features/SettingsFeature";
 import CloseBtn from "../utils/CloseBtn";
 import logoicon from "../assets/logo.svg";
-import myphoto from "../pages/1111111111111111111111111.webp"
-
-
+import myphoto from "../pages/1111111111111111111111111.webp";
 
 export default function Translate() {
   const navigate = useNavigate();
@@ -50,9 +48,12 @@ export default function Translate() {
   const [isBadVisible, setIsBadVisible] = useState(false);
   const [isSavedVisible, setSavedVisible] = useState(true);
   const [isSubscription, setSubscription] = useState(false);
+  const [successMessage, setSuccessMessage] = useState(""); // State to store success message
+  const [errorMessage, setErrorMessage] = useState("");
 
   const subscription = localStorage.getItem("subscription");
   const url = "http://localhost:4000";
+
   const getLanguages = async () => {
     try {
       const response = await axios.get(`${url}/translate/languages`);
@@ -173,10 +174,24 @@ export default function Translate() {
 
       console.log(user._id);
 
-      const content = { name, textToTranslate };
-      await axios.post(`${url}/bad/word`, {
-        params: content,
-      });
+      try {
+        const content = { name, textToTranslate };
+        const badWordResponse = await axios.post(`${url}/bad/word`, {
+          params: content,
+        });
+
+        console.log(badWordResponse.data); // Log the entire response for debugging
+
+        if (badWordResponse.data && badWordResponse.data.message === "Bad") {
+          alert("Bad Word Detected !!");
+          // Handle the bad word detection here (e.g., display a message)
+        } else {
+          console.log("No bad word detected.");
+        }
+      } catch (error) {
+        console.error("Error detecting bad word:", error);
+        console.log(error.response ? error.response.data : error.message);
+      }
 
       setTranslatedText(response.data);
 
@@ -192,7 +207,7 @@ export default function Translate() {
     // Navigate to the desired page on port 3001 with the word property in a new window/tab
     const word = textToTranslate; // Replace "yourData" with the actual word you want to pass
     const url = `http://localhost:3001/page?word=${word}`;
-    window.open(url, '_blank');
+    window.open(url, "_blank");
   };
 
   //Save History
@@ -782,19 +797,19 @@ export default function Translate() {
               {/* Add a feedback button */}
               {isLogedIn && (
                 <div>
-                <button
-                  className="feedback-button"
-                  onClick={handleFeedbackModalOpen}
-                >
-                  Provide Feedback
-                </button>
-                
-                <button
-                  className="dictionary-button"
-                  onClick={navigateToPage3001}
-                >
-                  Dictionary
-                </button>
+                  <button
+                    className="feedback-button"
+                    onClick={handleFeedbackModalOpen}
+                  >
+                    Provide Feedback
+                  </button>
+
+                  <button
+                    className="dictionary-button"
+                    onClick={navigateToPage3001}
+                  >
+                    Dictionary
+                  </button>
                 </div>
               )}
             </>
@@ -821,15 +836,14 @@ export default function Translate() {
       </div>
 
       <div className="h-auto w-full text-center bg-white">
-    <div className="mt-40"> 
-        <img src={myphoto} alt="photo1" style={{ width: '50%', height: '1%' }} />
+        <div className="mt-40">
+          <img
+            src={myphoto}
+            alt="photo1"
+            style={{ width: "45%", height: "1%" }}
+          />
+        </div>
+      </div>
     </div>
-</div>
-
-
-      
-      
-    </div>
-    
   );
 }
