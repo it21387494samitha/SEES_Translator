@@ -446,6 +446,7 @@ export default function Checkout() {
                       </label>
                       <input
                         type="text"
+                        maxLength="3"
                         id="security-code"
                         name="security-code"
                         placeholder="CVV"
