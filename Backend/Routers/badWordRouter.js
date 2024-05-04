@@ -1,6 +1,6 @@
 import express from "express";
 import BadWords from "bad-words";
-import badWordController from '../controllers/badWordController.js';
+import badWordController from "../controllers/badWordController.js";
 
 const badWordRouter = express.Router();
 const filter = new BadWords({ placeHolder: "X" });
@@ -11,12 +11,15 @@ badWordRouter.get("/", (req, res) => {
   console.log(filter.clean("Don't be a hank hell"));
 });
 
-
-badWordRouter.get('/all', badWordController.index)
-badWordRouter.get('/badpost', badWordController.getAllBWordsById)
-badWordRouter.post('/word', badWordController.checkBword, badWordController.store)
-badWordRouter.post('/a',badWordController.checkBword)
-badWordRouter.delete('/:id', badWordController.remove);
-
+badWordRouter.get("/all", badWordController.index);
+badWordRouter.get("/badpost", badWordController.getAllBWordsById);
+badWordRouter.post(
+  "/word",
+  badWordController.checkBword,
+  badWordController.store
+);
+badWordRouter.post("/a", badWordController.checkBword);
+badWordRouter.delete("/:id", badWordController.remove);
+badWordRouter.delete("/delete", badWordController.clearAllData);
 
 export default badWordRouter;

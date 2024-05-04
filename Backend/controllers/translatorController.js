@@ -18,7 +18,7 @@ const language = async (req, res) => {
     url: "https://google-translate1.p.rapidapi.com/language/translate/v2/languages",
     headers: {
       "Accept-Encoding": "application/gzip",
-      "X-RapidAPI-Key": "cee2294232mshc5d1c380d8f1993p19cf0ejsn4dc41c1849fe",
+      "X-RapidAPI-Key": "147fe7e16emsha4af8be054bf19ap13df75jsnc97dd427c822",
       "X-RapidAPI-Host": "google-translate1.p.rapidapi.com",
     },
   };
@@ -100,7 +100,7 @@ const translate =
       headers: {
         "content-type": "application/x-www-form-urlencoded",
         "Accept-Encoding": "application/gzip",
-        "X-RapidAPI-Key": "cee2294232mshc5d1c380d8f1993p19cf0ejsn4dc41c1849fe",
+        "X-RapidAPI-Key": "147fe7e16emsha4af8be054bf19ap13df75jsnc97dd427c822",
         "X-RapidAPI-Host": "google-translate1.p.rapidapi.com",
       },
       data: encodedParams,

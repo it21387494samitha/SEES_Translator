@@ -7,6 +7,8 @@ import "jspdf-autotable";
 import exporticon from "../../assets/export.svg";
 import staricon from "../../assets/star.svg";
 import logo from "../../assets/logo.svg";
+import { MdDeleteSweep } from "react-icons/md";
+import { PiExportBold } from "react-icons/pi";
 const HistoryFeature = (userId) => {
   const [history, setHistory] = useState([]);
   const user = userId.userId;
@@ -139,7 +141,7 @@ const HistoryFeature = (userId) => {
       <input
         type="text"
         placeholder="Search"
-        className="w-80 mt-4 ml-4 p-2 rounded-2xl border border-orange-300 mx-auto"
+        className="w-80 mt-4 ml-4 pl-4 rounded-xl  mx-auto"
         value={searchQuery}
         onChange={handleSearchChange}
       />
@@ -158,26 +160,19 @@ const HistoryFeature = (userId) => {
             <ul className="list-none p-2 m-2">
               {filteredHistory.map((item) => (
                 <li key={item._id} className="translate-history-item pt-1">
-                  <div className="bg-orange-100 shadow-xl dark:bg-orange-600 text-black w-40 p-2 flex justify-between items-center mb-2 rounded-full dark:text-white">
-                    <h2 className="text-x1 opacity-70 dark:text-white ml-2">
+                  <div className="bg-orange-100 shadow-xl dark:bg-orange-600 text-black w-40 p-2 flex justify-between items-center mb-2 rounded-xl dark:text-white">
+                    <h2 className="text-x1 opacity-90 dark:text-white ml-2">
                       {item.inputLanguage} <span>&rarr;</span>{" "}
                       {item.outputLanguage}
                     </h2>
                   </div>
                   <div className="flex items-center justify-end">
-                    <img
-                      src={staricon}
-                      className="h-5 w-5 opacity-80 cursor-pointer"
-                      alt="Star"
-                    />
-                    <img
-                      className="h-5 w-5 cursor-pointer ml-4"
-                      src={deletelogo}
-                      alt="Delete"
+                    <MdDeleteSweep
+                      className="text-3xl text-orange-600"
                       onClick={() => handleDelete(item._id)}
                     />
                   </div>
-                  <div className="ml-2 mt-2">
+                  <div className="ml-2 ">
                     <div className="original-text text-black opacity-70 dark:text-white">
                       <strong></strong> {item.textToTranslate}
                     </div>
@@ -197,7 +192,7 @@ const HistoryFeature = (userId) => {
         className="fixed top-4 right-10  text-white px-4 py-2 rounded "
         onClick={generateHistoryReport}
       >
-        <img src={exporticon} />
+        <PiExportBold className="text-xl" />
       </button>
     </div>
   );
